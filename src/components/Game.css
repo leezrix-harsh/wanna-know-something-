@@ -1,0 +1,192 @@
+.game-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background: radial-gradient(circle at center, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    overflow: hidden;
+}
+
+/* Twinkling Stars Background */
+.game-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(white, rgba(255, 255, 255, .2) 2px, transparent 3px),
+        radial-gradient(white, rgba(255, 255, 255, .15) 1px, transparent 2px),
+        radial-gradient(white, rgba(255, 255, 255, .1) 2px, transparent 3px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: twinkle 20s linear infinite;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes twinkle {
+    from {
+        transform: translateY(0);
+    }
+
+    to {
+        transform: translateY(-550px);
+    }
+}
+
+#gameCanvas {
+    display: block;
+    background-color: #0f1c2e;
+    box-shadow: 0 0 30px rgba(100, 200, 255, 0.3);
+    border-radius: 12px;
+    border: 2px solid #30475e;
+    z-index: 1;
+    cursor: default;
+}
+
+#gameCanvas.clickable-moon {
+    cursor: pointer;
+}
+
+.ui-layer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px;
+    height: 600px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    pointer-events: auto;
+    cursor: pointer;
+    backdrop-filter: blur(5px);
+    border-radius: 12px;
+}
+
+.start-screen h1 {
+    font-size: 56px;
+    margin-bottom: 10px;
+    color: #e94560;
+    text-shadow: 0 0 20px rgba(233, 69, 96, 0.6);
+    font-family: 'Outfit', sans-serif;
+}
+
+.start-screen p {
+    font-size: 20px;
+    color: #a8dadc;
+    animation: pulse 2s infinite;
+}
+
+.start-screen small {
+    margin-top: 10px;
+    opacity: 0.7;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.6;
+    }
+}
+
+#interaction-prompt {
+    position: absolute;
+    bottom: 140px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 255, 255, 0.95);
+    padding: 10px 20px;
+    border-radius: 30px;
+    font-weight: bold;
+    color: #1a1a2e;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    animation: bounce 1s infinite;
+    pointer-events: auto;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#dialogue-overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    pointer-events: auto;
+}
+
+#dialogue-box {
+    background: rgba(22, 33, 62, 0.95);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid #e94560;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    position: relative;
+}
+
+#dialogue-name {
+    position: absolute;
+    top: -15px;
+    left: 20px;
+    background-color: #e94560;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+#dialogue-text {
+    margin: 10px 0 0 0;
+    font-size: 18px;
+    line-height: 1.6;
+    min-height: 60px;
+}
+
+#dialogue-hint {
+    display: block;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #a8dadc;
+    text-align: right;
+    font-style: italic;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        transform: translateX(-50%) translateY(0);
+    }
+
+    50% {
+        transform: translateX(-50%) translateY(-5px);
+    }
+}
